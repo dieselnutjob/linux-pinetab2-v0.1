@@ -1400,11 +1400,11 @@ struct bes2600_platform_data_sdio *bes2600_get_platform_data(void)
 static void bes2600_get_gpio_from_dts(int *gpio_num, const char *gpio_name)
 {
 	int wakeup_gpio;
-	enum of_gpio_flags flags;
+	enum of_gpio_flags *flags;
 	struct device_node *wireless_node;
 	wireless_node = of_find_node_with_property(NULL, gpio_name);
 	if(wireless_node != NULL){
-		wakeup_gpio = of_get_named_gpio_flags(wireless_node, gpio_name, 0, &flags);
+		wakeup_gpio = of_get_named_gpio_flags(wireless_node, gpio_name, 0, flags);
 		if (gpio_is_valid(wakeup_gpio))
 			*gpio_num = wakeup_gpio;
 	}else{
